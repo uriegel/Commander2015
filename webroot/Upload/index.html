@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <script src=jquery.js></script>
+    <script src=script.js></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Ein Test</title>
+</head>
+
+<body>
+    <h1>Ein Test</h1>
+    <div id="loggedOff">Log' Dich mal ein!</div>
+    <table id="table">
+        <tr>
+            <td>Eingeloggt als:</td>
+            <td id="eingeloggt"></td>
+        </tr>
+        <tr>
+            <td>Session ID:</td>
+            <td id="session"></td>
+        </tr>
+    </table>
+    <p>
+        <button onclick="login()">Einloggen</button>
+    </p>
+    <p>
+        <input type="file" id="fileChooser" onchange="startRead()" >    
+    </p>
+</body>
+</html>

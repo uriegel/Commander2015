@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.coolappz.Tasks" version="1.0.0">
+    <name>Aufgaben</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <content src="index.html"/>
+    <platform name="android">
+      <icon density="ldpi" src="www/img/app.png"/>
+      <icon density="mdpi" src="www/img/app.png"/>
+      <icon density="hdpi" src="www/img/app.png"/>
+      <icon density="xhdpi" src="www/img/app.png"/>
+    </platform>
+  <access origin="*"/>
+</widget>

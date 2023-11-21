@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Taschenrechner</title>
+    <script language="JavaScript">
+        function Add()
+        {
+            var Value1 = new Number(document.getElementById("Value1").value);
+            var Value2 = new Number(document.getElementById("Value2").value);
+            document.getElementById("Result").innerHTML = Value1 + Value2;
+        }
+        function Sub()
+        {
+            var Value1 = new Number(document.getElementById("Value1").value);
+            var Value2 = new Number(document.getElementById("Value2").value);
+            document.getElementById("Result").innerHTML = Value1 - Value2;
+        }
+        function Mul()
+        {
+            var Value1 = new Number(document.getElementById("Value1").value);
+            var Value2 = new Number(document.getElementById("Value2").value);
+            document.getElementById("Result").innerHTML = Value1 * Value2;
+        }
+        function Div()
+        {
+            var Value1 = new Number(document.getElementById("Value1").value);
+            var Value2 = new Number(document.getElementById("Value2").value);
+            document.getElementById("Result").innerHTML = Value1 / Value2;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Taschenrechner</h1>
+    <p>
+        Zahl 1:
+        <input type="text" id="Value1">
+    </p>
+    <p>
+        Zahl 2:
+        <input type="text" id="Value2">
+    </p>
+    <p>
+        Ergebnis: <p id="Result"></p>
+    </p>
+    <input type="button"
+           value="+"
+           onclick=Add() />
+    <input type="button"
+           value="-"
+           onclick=Sub() />
+    <input type="button"
+           value="*"
+           onclick=Mul() />
+    <input type="button"
+           value="/"
+           onclick=Div() />
+
+
+</body>
+</html>

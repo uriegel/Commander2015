@@ -1,0 +1,70 @@
+#templates {
+    display: none;
+}
+
+body {
+    font-family: sans-serif;
+    overflow:hidden;
+    padding: 0px;
+    margin: 0px;
+}
+
+footer {
+    font-size: 75%;
+    position:absolute;
+    width:100%;
+    padding:3px;
+    bottom:0;    
+    color: white;
+    background-color: blue;
+    
+    border-top-color: lightgray;
+    border-top-style: solid;
+    border-top-width: 1px;
+}
+
+tr {
+    font-size: 75%;
+    height: 20px;
+}
+
+td {
+    padding-left:5px;
+    padding-right: 5px;
+}
+
+th {
+    padding-left:5px;
+    text-align: left;
+    font-weight: normal;
+    color: white;
+    background-color: blue;
+    border-left-color: white;
+    border-left-style: solid;
+    border-left-width: 1px;
+}
+th:last-child {
+    border-right-style: none;
+}
+
+.iconName > * {
+    vertical-align: middle;
+}
+
+.iconName {
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.image {
+    padding-right: 3px;
+}
+
+#size {
+    text-align: right;
+}
+
+.exif {
+    color: blue;
+}

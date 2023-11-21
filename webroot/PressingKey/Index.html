@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+   <title>Processing Keystrokes</title>
+   <script language="JavaScript">
+      function CheckStrokes(event)
+      {
+         // Check for an Alt key press.
+         if (event.altKey)
+         {
+            // Determine which character the user pressed
+            // and perform the required focus change.
+            switch
+            (String.fromCharCode(event.charCode).toUpperCase())
+            {
+               case "A":
+                  document.getElementById("txtAddress").focus();
+                  break;
+               case "C":
+                  document.getElementById("txtCity").focus();
+                  break;
+               case "N":
+                  document.getElementById("txtName").focus();
+                  break;
+            }
+         }
+      }
+   </script>
+</head>
+
+<body>
+   <form id="TestForm"
+         onkeypress="CheckStrokes(event)">
+      <h1>Processing Keystrokes</h1>
+      <div>
+         <label>(N)ame: </label>
+         <input id="txtName"
+                type="text" />
+      </div>
+      <div>
+         <label>(A)dress: </label>
+         <input id="txtAddress"
+                type="text" />
+      </div>
+      <div>
+         <label>(C)ity: </label>
+         <input id="txtCity"
+                type="text" />
+      </div>
+   </form>
+   <script language="JavaScript">
+      document.getElementById("txtName").focus();
+   </script>
+</body>
+</html>

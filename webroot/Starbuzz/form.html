@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>The Starbuzz Bean Machine</title>
+    <link rel="stylesheet" type="text/css" href="starbuzz.css">
+    <link rel="stylesheet" type="text/css" href="styledform.css">
+</head>
+
+<body>
+    <h1>The Starbuzz Bean Machine</h1>
+    <h2>Fill out the form below and click "order now" to order</h2>
+    <form action="http://starbuzzcoffee.com/processorder.php" method="POST">
+        <div class="tableRow">
+            <p>
+                Choose your beans:
+            </p>
+            <p>
+                <select name="beans">
+                    <option value="House Blend">House Blend</option>
+                    <option value="Bolivia">Bolivia</option>
+                    <option value="Guatemala">Guatemala</option>
+                    <option value="Kenya">Kenya</option>
+                </select>
+            </p>
+        </div>
+        <div class="tableRow">
+            <p>Type: </p>
+            <p>
+                <input type="radio" name="beantype", value="whole"> Whole Bean <br>
+                <input type="radio" name="beantype", value="ground" checked> Ground
+            </p>
+        </div>
+        <div class="tableRow">
+            <p>Number of bags: </p>
+            <p><input type="number" name="bags" min="1" max="10"></p>
+        </div>
+        <div class="tableRow">
+            <p>Must arrive by date: </p>
+            <p><input type="date" name="date"></p>
+        </div>
+        <div class="tableRow">
+            <p>Extras: </p>
+            <p>
+                <input type="checkbox" name="extras[]" value="giftwrap" checked>Gift wrap<br>
+                <input type="checkbox" name="extras[]" value="catalog">Include catalog with order
+            </p>
+        </div>
+        <div class="tableRow">
+            <p class="heading">Ship to: </p>
+            <p></p>
+        </div>
+        <div class="tableRow">
+            <p>Name: </p>
+            <p><input type="text" name="name" required><br></p>
+        </div>
+        <div class="tableRow">
+            <p>Address: </p>
+            <p><input type="text" name="address"><br></p>
+        </div>
+        <div class="tableRow">
+            <p>City: </p>
+            <p><input type="text" name="city"><br></p>
+        </div>
+        <div class="tableRow">
+            <p>State: </p>
+            <p><input type="text" name="state"><br></p>
+        </div>
+        <div class="tableRow">
+            <p>Zip: </p>
+            <p><input type="text" name="zip"><br></p>
+        </div>
+        <div class="tableRow">
+            <p>Phone: </p>
+            <p><input type="text" name="phone"><br></p>
+        </div>
+        <div class="tableRow">
+            <p>Cusomer Comments:</p>
+            <p><textarea name=comments placeholder="Fill out the comment field"></textarea></p>
+        </div>
+        <div class="tableRow">
+            <p></p>
+            <p><input type="submit" value="Order Now"></p>
+        </div>
+    </form>
+</body>
+</html>

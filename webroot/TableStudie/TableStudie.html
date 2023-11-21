@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                font-family: sans-serif;
+                overflow:hidden;
+                padding: 0px;
+                margin: 0px;
+                padding-right: 1px;
+            }
+            table {
+                position: fixed;
+                top: 0px;
+                border-color: graytext;
+                border-style: solid;
+                border-width: 1px;
+                border-collapse:collapse;
+                table-layout:fixed;
+                background-color: white;
+            }
+            #linker {
+                left: 0px;
+            }
+            #rechter {
+                right: 0px;
+            }
+            #grip {
+                position: fixed;
+                left: 200px;
+                height: 100px;
+                cursor: ew-resize;
+                margin: 2px;
+                width: 5px;
+                z-index: 100;
+                background-color: lightgray;
+            }            
+            td, th, caption {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;                
+            }
+            th {
+                border-right-style: solid;
+                border-right-width: 1px;
+                border-right-color: white;
+                color: white;
+                font-weight: 100;
+                background-color: blue;
+            }
+            th:last-child {
+                border-right-style: none;
+            }
+            #templates{
+                display:none;
+            }
+            #popup {
+                display:none;
+                z-index: 300;
+                position: absolute;
+                width:400px;
+                height:150px;
+                background-color: white;
+                text-align: center; 
+                padding-top: 120px;
+                padding-bottom: -100px;
+                top: 25%;
+                left: 25%;
+                box-shadow: 3px 3px 70px darkgray;
+                transition: witdh 2s;
+                transition: height 2s;
+            }
+            #filter {
+                display:none;
+                z-index: 299;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0.25;
+                background-color: black;
+                -webkit-transition: opacity 2s;
+            }
+        </style>
+        <script src="jquery-2.1.3.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $left = $("#linker");
+                $right = $("#rechter");
+                ccl = new ColumnsControl("#linker");
+                ccr = new ColumnsControl("#rechter");
+                
+                $(window).resize(onResize);
+                factor = 1/2;
+                onResize();
+
+                $("#popup").click(function() {
+                    $("#popup").fadeOut();
+                    $("#filter").fadeOut();
+                })
+                
+
+                $("#grip").mousedown(function(evt){
+                    $("#popup").fadeIn();
+                    $("#filter").fadeIn();
+                    return;
+                    var $node = $("#templates #filter").clone(true);
+                    $("body").append($node);
+                    $node = $("#templates #popup").clone(true);
+                    $node.click(function() {
+                        $("#filter").remove();
+                        $("#popup").remove();
+                        
+                    })
+                    $("body").append($node);
+//                    gripStarted = true;
+//                    $('html,body').css('cursor','ew-resize');
+//                    gripPosition = evt.pageX;
+//                    evt .preventDefault(); 
+                });
+                
+                $(window).mousemove(function(evt){
+                    if (gripStarted) {
+                        if (evt.which == 0){
+                            gripStarted = false;
+                            $('html,body').css('cursor','default');
+                            return;
+                        }
+
+                        if (factor == 0.98) {
+                            if ($("#grip").offset().left < evt.pageX)
+                                return;
+                        }
+                        else if (factor == 0.02) {
+                            if ($("#grip").offset().left > evt.pageX)
+                                return;
+                        }
+
+                        var newGripPosition = evt.pageX;
+                        var diff = newGripPosition - gripPosition;
+                        
+                        var newGrip = windowWidth * factor + diff;
+                        factor = newGrip / windowWidth;
+                        
+            
+                        if (factor > 0.98)
+                            factor = 0.98;
+                        if (factor < 0.02)
+                            factor = 0.02;
+
+                        gripPosition = newGripPosition;
+                        onResize();
+                        evt.preventDefault(); 
+                    }
+                });
+            });
+            
+            var ccl;
+            var ccr;
+            var $left = $("#linker");
+            var $right = $("#rechter");
+            var windowWidth;
+            var start;
+            var factor;
+            var gripStarted = false;
+            var gripPosition;
+            var tableGripPosition;
+            
+            function onResize() {
+                windowWidth = $(window).width();
+                start = windowWidth * factor;
+                var end = windowWidth * (1 - factor);
+                $left.css("left", "0px");
+                $left.width(start - 3);
+                $right.css("left", (start + 6) + "px");
+                $right.width(end - 6);
+                $("#grip").css("left", (start - 3) + "px");
+                ccl.resize(start - 2);
+                ccr.resize(end - 6 - 10);
+            };
+            
+            function ColumnsControl(id) {
+                this.headSelector = id + " th";
+                this.grippingReady = false;
+                this.isGripping = false;
+                this.startGripPosition = 0;
+                this.currentLeftWidth = 0;
+                this.sumWidth = 0;
+                this.previous = false;
+                this.$currentHeader = null;
+                this.$nextHeader = null;
+                
+                this.resizeTimerInterval;
+                
+                var columnsControl = this;
+
+                $(columnsControl.headSelector).mousedown(function(evt) {
+                    if (!columnsControl.grippingReady)
+                        return;
+                    columnsControl.gripStarted = true;
+                    $('html,body,thead').css('cursor','ew-resize');
+                    columnsControl.startGripPosition = evt.pageX;
+                    
+                    columnsControl.isGripping = true;
+                    columnsControl.currentWidth = 0;
+                    if (!columnsControl.previous)
+                        columnsControl.$currentHeader = $(this);
+                    else
+                        columnsControl.$currentHeader = $(this).prev();
+                    columnsControl.$nextHeader = columnsControl.$currentHeader.next();
+                    columnsControl.currentLeftWidth = columnsControl.$currentHeader.outerWidth();
+                    columnsControl.sumWidth = columnsControl.currentLeftWidth + columnsControl.$nextHeader.outerWidth();
+                    evt.preventDefault(); 
+                });
+                
+                $(id).mousemove(function(evt) {
+                    if (!columnsControl.isGripping) {
+                        var $th = $(evt.target);
+                        if ($th.is("th") && ($th.offset().left + $th.outerWidth() - evt.pageX < 4 || evt.pageX - $th.offset().left < 4)) {
+                            $('html,body,thead').css('cursor','ew-resize');
+                            columnsControl.grippingReady = true;
+                            columnsControl.previous = evt.pageX - $th.offset().left < 4;
+                        }
+                        else {
+                            $('html,body,thead').css('cursor','default');
+                            columnsControl.grippingReady = false;
+                        }
+                    }
+                    else {
+                        if (evt.which == 0) {
+                            columnsControl.isGripping = false;
+                            $('html,body,thead').css('cursor','default');
+                            return;
+                        }
+                        
+                        var diff = evt.pageX - columnsControl.startGripPosition;
+                        
+                        if (columnsControl.currentLeftWidth + diff < 5)
+                            diff = 5 - columnsControl.currentLeftWidth;
+                        else if (diff > columnsControl.sumWidth - columnsControl.currentLeftWidth - 5)
+                            diff = columnsControl.sumWidth - columnsControl.currentLeftWidth - 5;
+                       
+                        columnsControl.$currentHeader.outerWidth(columnsControl.currentLeftWidth + diff);
+                        columnsControl.$nextHeader.outerWidth(columnsControl.sumWidth - columnsControl.currentLeftWidth - diff);
+
+                        $(columnsControl.headSelector).each(function(i) {
+                            columnsControl.widths[i] = $(this).outerWidth();
+                        });
+
+                        evt.preventDefault(); 
+                    }
+                });        
+            };
+
+            ColumnsControl.prototype.resize = function(newWidth) {
+                var cc = this;
+                clearInterval(this.resizeTimer);
+                this.resizeTimer = setInterval(function() {
+                    clearInterval(cc.resizeTimer);
+                    
+                    var widths = new Array();
+                    $(cc.headSelector).each(function(i){
+                        widths[i] = $(this).outerWidth();
+                    });
+    
+                    var sumWidth = 0;
+                    widths.forEach(function(item){
+                        sumWidth += item;
+                    });
+                    
+                    var factor = newWidth / sumWidth;
+
+                    $(cc.headSelector).each(function(i){
+                        var w = widths[i] * factor;
+                        $(this).outerWidth(w);
+                    });
+                }, 100);
+            };
+
+        </script>
+    </head>
+    <body>
+        <table id="linker">
+            <caption>Überschrift</caption>
+            <thead>
+                <tr>
+                    <th id="eins">Erste</th>
+                    <th id="zwei">Zweite</th>
+                    <th id="drei">3.</th>
+                    <th id="vier">4.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>jkjk</td>
+                    <td>jkjk</td>
+                    <td>jkjk</td>
+                    <td>34543</td>
+                </tr>
+                <tr>
+                    <td>4545</td>
+                    <td>56756756</td>
+                    <td>7</td>
+                    <td>34543</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="grip"></div>
+        <table id="rechter">
+            <caption>Überschrift</caption>
+            <thead>
+                <tr>
+                    <th>Erste</th>
+                    <th>Zweite</th>
+                    <th>3.</th>
+                    <th>4.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>jkjk</td>
+                    <td>jkjk</td>
+                    <td>jkjk</td>
+                    <td>34543</td>
+                </tr>
+                <tr>
+                    <td>4545</td>
+                    <td>56756756</td>
+                    <td>7</td>
+                    <td>34543</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!--<div id="templates">-->
+            <div id="filter">
+            </div>
+            <div id="popup">
+                Das soll mal so gesagt werden
+            </div>
+        <!--</div>-->
+    </body>
+</html>

@@ -1,0 +1,11 @@
+
+Commander/Commander/bin
+Commander/Commander/obj
+HttpServer/Application/bin
+HttpServer/Application/obj
+HttpServer/HttpServer/bin
+HttpServer/HttpServer/obj
+HttpServer/MightyGumBall/bin
+HttpServer/MightyGumBall/obj
+HttpServer/Uploader/bin
+HttpServer/Uploader/obj

@@ -1,0 +1,84 @@
+@font-face
+{
+    font-family: "Emblema One";
+    src: url("http://wickedlysmart.com/hfhtmlcss/chapter8/journal/EmblemaOne-Regular.woff");
+}
+body
+{
+    font-family: Verdana, Geneva, Arial, sans-serif;
+    font-size: small;
+}
+h1, h2
+{
+    color: #cc6600;
+    border-bottom: thin dotted #888888;
+}
+h1
+{
+    font-family: "Emblema One", sans-serif;
+    font-size: 220%;
+}
+h2
+{
+    font-size: 130%;
+    font-weight: normal;
+}
+blockquote
+{
+    font-style: italic;
+}
+table
+{
+    margin-left: 20px;
+    margin-right: 20px;
+    border: thin solid black;
+    caption-side: bottom;
+    border-collapse: collapse;
+}
+th
+{
+    background-color: #cc6600;
+}
+
+td,th
+{
+    border: thin dotted gray;
+    padding: 5px;
+}
+tr:nth-child(odd)
+{
+    background-color: #fcba7a;
+}
+td:first-child + td, td:first-child + td + td, td:first-child + td + td + td +td + td
+{
+    text-align: center;
+}
+td:first-child + td + td + td, td:first-child + td + td + td + td 
+{
+    text-align: right;
+}
+caption
+{
+    font-style: italic;
+    padding-top: 8px;
+    text-align: center;
+}
+/*.firstSubCell*/
+td p:first-child
+{
+    border-bottom:  thin dotted gray;       
+}
+table table th
+{
+    background-color:  white;
+}
+table table tr td
+{
+    background-color:  white;
+}
+li
+{
+    list-style-image: url(images/backpack.gif);
+    padding-top:5px;
+    margin-left:20px;
+}

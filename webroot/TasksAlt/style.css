@@ -1,0 +1,117 @@
+body, ul, li {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+h1, h2, h3 {
+    font-weight: 100;
+    text-align: center;
+}
+
+body
+{
+    font-family: sans-serif;
+    overflow: hidden; /* this is important to prevent the whole page to bounce */
+}
+
+.header {
+    position: absolute;
+    z-index: 2; 
+    top: 0;
+    left: 0;
+    width: calc(100% - 45px);
+    padding-left: 10px;
+    height: 45px;
+    line-height: 45px;
+    background: lightskyblue;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+    color: white;
+    font-size: 20px;
+}
+
+#notebook {
+    margin-bottom: -10px;
+    width: 35px;
+    height: 35px;
+}
+
+#okimg {
+    margin-bottom: -3px;
+    width: 30px;
+    height: 30px;
+}
+
+.headerbutton {
+    left: calc(100% - 45px);
+    width: 45px;
+    padding: 0;
+    font-size: 38px;
+    text-align: center;
+    transition: background 0.4s;
+}
+
+.headerbutton:hover {
+    background: #ABDEFC;
+}
+
+.headerbutton:active {
+    background: blue;
+}
+
+#wrapper {
+    position: absolute;
+    z-index: 1;
+    top: 45px;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.list {
+    background: #efefef;
+}
+
+#scroller {
+    position: absolute;
+    z-index: 1;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    width: 100%;
+    transform: translateZ(0);
+    text-size-adjust: none;
+}
+
+#scroller ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    background-color: white;
+}
+
+#scroller ul li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+#scroller ul li div {
+    font-size: 70%;
+}
+
+#scroller ul .date {
+    color: blue;
+    padding: 15px 10px 0px 10px;
+    border-bottom: 1px solid #777;
+}
+
+#scroller ul .item {
+    transition: background-color 0.05s;
+}
+
+#scroller ul .uactive  {
+    background-color: lightskyblue;
+}

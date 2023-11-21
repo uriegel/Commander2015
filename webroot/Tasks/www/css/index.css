@@ -1,0 +1,129 @@
+body, ul, li {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+h1, h2, h3 {
+    font-weight: 100;
+}
+
+body
+{
+    font-family: sans-serif;
+    overflow: hidden; /* this is important to prevent the whole page to bounce */
+}
+
+.header {
+    left: 0px;
+}
+
+.header, .headerbutton {
+    position: absolute;
+    z-index: 2; 
+    top: 0px;
+    width: 100%;
+    height: 45px;
+    line-height: 45px; 
+    background: mediumslateblue;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+    color: white;
+    font-size: 20px;
+}
+
+.headerTitle {
+    padding-left: 10px;
+    vertical-align: top;
+}
+
+.headerImage {
+    margin-top: 6px;
+    width: 32px;
+    height: 32px;
+}
+
+.headerbutton {
+    left: calc(100% - 45px);
+    width: 45px;
+    padding: 0;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.headerbutton:active {
+    background: blue;
+    box-shadow: 0px 0px 23px 4px rgba(179,179,97,1);
+}
+
+#testPage{
+    display: none;    
+}
+
+#Affe  {
+    left: -70px;
+}
+
+#wrapper {
+    position: absolute;
+    z-index: 1;
+    top: 45px;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    background: #ccc;
+    overflow: hidden;
+}
+
+#scroller {
+    z-index: 1;
+    width: 100%;
+    transform: translateZ(0);
+    text-size-adjust: none;
+}
+
+#scroller ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+}
+
+#scroller ul li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #fff;
+    background-color: #fafafa;
+}
+
+
+#scroller ul li div div {
+    font-size: 70%;
+}
+
+#scroller ul .date {
+    color: blue;
+    padding: 15px 10px 0px 10px;
+    border-bottom: 1px solid #777;
+    background-color: #fafafa;
+}
+
+#scroller ul .item {
+    transition: background-color 0.05s;
+}
+
+#templates { 
+    display: none;
+}
+
+a:link, a:visited {
+    display: block;
+    font-weight: normal;
+    color: #000;
+    width: 120px;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+}
